@@ -9,45 +9,47 @@ const AdminLogin = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    
-   
     if (email === "admin@example.com" && password === "password123") {
       login({ email, role: "admin" });
-      navigate("/admin/dashboard"); 
+      navigate("/admin/dashboard");
     } else {
-      setError("Invalid credentials!");
+      setError("Invalid credentials! Please try again.");
     }
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Admin Login</h2>
-      {error && <p className="text-danger">{error}</p>}
-      <form onSubmit={handleLogin}>
-        <div className="mb-3">
-          <label>Email:</label>
-          <input 
-            type="email" 
-            className="form-control"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required 
-          />
-        </div>
-        <div className="mb-3">
-          <label>Password:</label>
-          <input 
-            type="password" 
-            className="form-control"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required 
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">Login</button>
-      </form>
+    <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
+      <div className="card shadow p-4" style={{ width: "400px" }}>
+        <h2 className="text-center mb-4">Admin Login</h2>
+        {error && <div className="alert alert-danger">{error}</div>}
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label className="form-label">Email</label>
+            <input
+              type="email"
+              className="form-control"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" className="btn btn-primary w-100">
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
